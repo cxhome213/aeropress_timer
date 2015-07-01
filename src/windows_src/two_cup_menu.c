@@ -10,10 +10,6 @@ static MenuLayer *s_menu_layer;
 
 static GBitmap *s_icon_bitmap_menu;
 
-static BitmapLayer *s_icon_layer1;
-
-static GBitmap *s_icon_bitmap1;
-
 static uint16_t get_num_rows_callback(MenuLayer *menu_layer, uint16_t section_index, void *context) {
   return NUM_WINDOWS;
 }
@@ -50,7 +46,7 @@ static void select_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index,
 }
 
 static void draw_header_callback(GContext *ctx, const Layer *cell_layer, uint16_t section_index, void *context) {
-  menu_cell_basic_header_draw(ctx, cell_layer, "  Two Cup Recipes");
+  menu_cell_basic_header_draw(ctx, cell_layer, "Two Cup Recipes");
 }
 
 static int16_t get_header_height_callback(struct MenuLayer *menu_layer, uint16_t section_index, void *context) {
@@ -80,8 +76,8 @@ static void window_load(Window *window) {
   });
   layer_add_child(window_layer, menu_layer_get_layer(s_menu_layer));
 
-	menu_layer_set_normal_colors(s_menu_layer, GColorWindsorTan, GColorPastelYellow);
-	//menu_layer_set_highlight_colors(s_menu_layer, GColorCyan, GColorPastelYellow);
+	menu_layer_set_normal_colors(s_menu_layer, GColorTiffanyBlue, GColorPastelYellow);
+	menu_layer_set_highlight_colors(s_menu_layer, GColorMidnightGreen, GColorWhite);
 	menu_layer_pad_bottom_enable(s_menu_layer, true);
 }
 

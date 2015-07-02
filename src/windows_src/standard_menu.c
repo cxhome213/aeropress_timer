@@ -113,6 +113,7 @@ static void window_load(Window *window) {
 
 static void window_unload(Window *window) {
   menu_layer_destroy(s_menu_layer);
+	gbitmap_destroy(s_icon_bitmap_menu);
 }
 
 void standard_menu_push() {

@@ -75,15 +75,17 @@ static void window_load(Window *window) {
       .get_header_height = (MenuLayerGetHeaderHeightCallback)get_header_height_callback,
       .get_num_sections = (MenuLayerGetNumberOfSectionsCallback)get_num_sections_callback,
   });
-  layer_add_child(window_layer, menu_layer_get_layer(s_menu_layer));
-
+  
 	menu_layer_set_normal_colors(s_menu_layer, GColorTiffanyBlue, GColorPastelYellow);
 	menu_layer_set_highlight_colors(s_menu_layer, GColorMidnightGreen, GColorWhite);
 	menu_layer_pad_bottom_enable(s_menu_layer, true);
+
+	layer_add_child(window_layer, menu_layer_get_layer(s_menu_layer));
 }
 
 static void window_unload(Window *window) {
   menu_layer_destroy(s_menu_layer);
+	gbitmap_destroy(s_icon_bitmap_menu);
 }
 
 void main_menu_init() {

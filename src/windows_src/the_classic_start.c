@@ -1,4 +1,5 @@
 #include <pebble.h>
+#include "aeropress_timer.h"
 
 #include "windows_include/the_classic_run.h"
 
@@ -19,7 +20,7 @@ static void main_window_load(Window *window) {
   GRect bounds = layer_get_frame(window_layer);
 
   s_text_layer = text_layer_create(GRect(0, 5, bounds.size.w, bounds.size.h));
-  text_layer_set_text_color(s_text_layer, GColorPastelYellow);
+  text_layer_set_text_color(s_text_layer, NormalTextColor);
   text_layer_set_background_color(s_text_layer, GColorClear);
   text_layer_set_font(s_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));
   text_layer_set_text_alignment(s_text_layer, GTextAlignmentCenter);
@@ -35,7 +36,7 @@ static void main_window_unload(Window *window) {
 void the_classic_start() {
 	if(!s_main_window) {
     s_main_window = window_create();
-    window_set_background_color(s_main_window, GColorTiffanyBlue);
+    window_set_background_color(s_main_window, BackGroundColor);
     window_set_window_handlers(s_main_window, (WindowHandlers) {
         .load = main_window_load,
         .unload = main_window_unload,

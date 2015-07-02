@@ -2,6 +2,7 @@
 
 #include "windows_include/standard_menu.h"
 #include "windows_include/the_classic_start.h"
+#include "aeropress_timer.h"
 
 #define NUM_WINDOWS 7
 #define CHECKBOX_WINDOW_CELL_HEIGHT 30
@@ -106,8 +107,8 @@ static void window_load(Window *window) {
   });
   layer_add_child(window_layer, menu_layer_get_layer(s_menu_layer));
 
-	menu_layer_set_normal_colors(s_menu_layer, GColorTiffanyBlue, GColorPastelYellow);
-	menu_layer_set_highlight_colors(s_menu_layer, GColorMidnightGreen, GColorWhite);
+	menu_layer_set_normal_colors(s_menu_layer, BackGroundColor, NormalTextColor);
+	menu_layer_set_highlight_colors(s_menu_layer, ForeGroundColor, HighlightTextColor);
 	menu_layer_pad_bottom_enable(s_menu_layer, true);
 }
 
@@ -119,7 +120,7 @@ static void window_unload(Window *window) {
 void standard_menu_push() {
 	if(!s_main_window) {
     s_main_window = window_create();
-    window_set_background_color(s_main_window, GColorTiffanyBlue);
+    window_set_background_color(s_main_window, BackGroundColor);
     window_set_window_handlers(s_main_window, (WindowHandlers) {
         .load = window_load,
         .unload = window_unload,

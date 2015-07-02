@@ -1,5 +1,6 @@
 #include <pebble.h>
 #include <main.h>
+#include "aeropress_timer.h"
 
 #define PROCESS_NUM 4
 
@@ -44,15 +45,15 @@ static void tick_handler(struct tm *tick_time, TimeUnits changed) {
 
 static void update_proc(Layer *layer, GContext *ctx) {
 
-	graphics_context_set_stroke_color(ctx, GColorPastelYellow);
+	graphics_context_set_stroke_color(ctx, NormalTextColor);
 	graphics_context_set_stroke_width(ctx, 4);
 
-	text_layer_set_text_color(s_num_text_layer, GColorPastelYellow);
+	text_layer_set_text_color(s_num_text_layer, NormalTextColor);
 	text_layer_set_background_color(s_num_text_layer, GColorClear);
 	text_layer_set_font(s_num_text_layer, fonts_get_system_font(FONT_KEY_ROBOTO_BOLD_SUBSET_49));
 	text_layer_set_text_alignment(s_num_text_layer, GTextAlignmentCenter);
 
-	text_layer_set_text_color(s_process_text_layer, GColorPastelYellow);
+	text_layer_set_text_color(s_process_text_layer, NormalTextColor);
 	text_layer_set_background_color(s_process_text_layer, GColorClear);
 	text_layer_set_font(s_process_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
 	text_layer_set_text_alignment(s_process_text_layer, GTextAlignmentCenter);
@@ -133,7 +134,7 @@ static void main_window_unload(Window *window) {
 void the_classic_run() {
 	if(!s_main_window) {
     s_main_window = window_create();
-    window_set_background_color(s_main_window, GColorTiffanyBlue);
+    window_set_background_color(s_main_window, BackGroundColor);
     window_set_window_handlers(s_main_window, (WindowHandlers) {
         .load = main_window_load,
         .unload = main_window_unload,

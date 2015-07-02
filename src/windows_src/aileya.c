@@ -3,6 +3,7 @@
  */
 
 #include "windows_include/aileya.h"
+#include "aeropress_timer.h"
 
 static Window *s_main_window;
 static BitmapLayer *s_icon_layer;

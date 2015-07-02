@@ -86,22 +86,25 @@ static void window_unload(Window *window) {
   menu_layer_destroy(s_menu_layer);
 }
 
-static void init() {
-  s_main_window = window_create();
-	//window_set_background_color(s_main_window, GColorWindsorTan);
-  window_set_window_handlers(s_main_window, (WindowHandlers) {
-      .load = window_load,
-      .unload = window_unload,
-  });
+void main_menu_init() {
+	if(!s_main_window) {
+    s_main_window = window_create();
+		//window_set_background_color(s_main_window, GColorWindsorTan);
+    window_set_background_color(s_main_window, GColorTiffanyBlue);
+    window_set_window_handlers(s_main_window, (WindowHandlers) {
+        .load = window_load,
+        .unload = window_unload,
+    });
+  }
   window_stack_push(s_main_window, true);
 }
 
-static void deinit() {
+void main_menu_deinit() {
   window_destroy(s_main_window);
 }
 
 int main() {
-  init();
+  main_menu_init();
   app_event_loop();
-  deinit();
+  main_menu_deinit();
 }

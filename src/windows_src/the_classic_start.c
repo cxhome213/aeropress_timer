@@ -5,13 +5,13 @@
 static Window *s_main_window;
 static TextLayer *s_text_layer;
 
-void the_classic_run_click_handler(ClickRecognizerRef recognizer, void *context) {
+void the_classic_start_click_handler(ClickRecognizerRef recognizer, void *context) {
   the_classic_run();
 }
 
-void config_provider(Window *window) {
+void the_classic_start_config_provider(Window *window) {
  // single click / repeat-on-hold config:
-  window_single_repeating_click_subscribe(BUTTON_ID_SELECT, 1000, the_classic_run_click_handler);
+  window_single_repeating_click_subscribe(BUTTON_ID_SELECT, 1000, the_classic_start_click_handler);
 }
 
 static void main_window_load(Window *window) {
@@ -19,7 +19,7 @@ static void main_window_load(Window *window) {
   GRect bounds = layer_get_frame(window_layer);
 
   s_text_layer = text_layer_create(GRect(0, 5, bounds.size.w, bounds.size.h));
-  text_layer_set_text_color(s_text_layer, GColorWhite);
+  text_layer_set_text_color(s_text_layer, GColorPastelYellow);
   text_layer_set_background_color(s_text_layer, GColorClear);
   text_layer_set_font(s_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));
   text_layer_set_text_alignment(s_text_layer, GTextAlignmentCenter);
@@ -33,13 +33,16 @@ static void main_window_unload(Window *window) {
 }
 
 void the_classic_start() {
-  s_main_window = window_create();
-  window_set_background_color(s_main_window, GColorTiffanyBlue);
-  window_set_window_handlers(s_main_window, (WindowHandlers) {
-    .load = main_window_load,
-    .unload = main_window_unload,
-  });
-  window_stack_push(s_main_window, true);
+	if(!s_main_window) {
+    s_main_window = window_create();
+    window_set_background_color(s_main_window, GColorTiffanyBlue);
+    window_set_window_handlers(s_main_window, (WindowHandlers) {
+        .load = main_window_load,
+        .unload = main_window_unload,
+    });
+  }
 
-	window_set_click_config_provider(s_main_window, (ClickConfigProvider) config_provider);
+	window_stack_push(s_main_window, true);
+
+	window_set_click_config_provider(s_main_window, (ClickConfigProvider) the_classic_start_config_provider);
 }

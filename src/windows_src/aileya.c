@@ -46,7 +46,7 @@ static void window_unload(Window *window) {
 void aileya_push() {
   if(!s_main_window) {
     s_main_window = window_create();
-    window_set_background_color(s_main_window, GColorJaegerGreen);
+    window_set_background_color(s_main_window, GColorTiffanyBlue);
     window_set_window_handlers(s_main_window, (WindowHandlers) {
         .load = window_load,
         .unload = window_unload,

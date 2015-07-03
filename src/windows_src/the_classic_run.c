@@ -126,6 +126,7 @@ static void main_window_load(Window *window) {
 }
 
 static void main_window_unload(Window *window) {
+	window_set_click_config_provider(s_main_window, NULL);
 	text_layer_destroy(s_process_text_layer);
   text_layer_destroy(s_num_text_layer);
 	layer_destroy(s_canvas_layer);

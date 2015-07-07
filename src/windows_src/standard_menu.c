@@ -1,7 +1,7 @@
 #include <pebble.h>
 
 #include "windows_include/standard_menu.h"
-#include "windows_include/the_classic_start.h"
+#include "windows_include/the_classic_run.h"
 #include "aeropress_timer.h"
 
 #define NUM_WINDOWS 7
@@ -51,7 +51,7 @@ static int16_t get_cell_height_callback(struct MenuLayer *menu_layer, MenuIndex 
 static void select_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index, void *context) {
   switch(cell_index->row) {
     case 0:
-      the_classic_start();
+      the_classic_run();
       break;
     case 1:
       //dialog_choice_window_push();

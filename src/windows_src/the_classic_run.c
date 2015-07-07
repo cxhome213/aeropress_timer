@@ -19,22 +19,24 @@ static volatile int pre_count;
 static Window *s_main_window;
 static TextLayer *s_num_text_layer;
 static TextLayer *s_process_text_layer;
+static TextLayer *s_pre_text_layer;
 static Layer *s_canvas_layer;
 
 static GPoint s_circle;
 static GPoint s_num_text;
 static GPoint s_process_text;
 
-int flag_classic_run_click;
+int flag_classic_run_click, flag_text_layer_destroy = 0;
 
 void the_classic_run_click_handler(ClickRecognizerRef recognizer, void *context) {
   main_menu_init();
 }
 
+/*
 void the_classic_run_config_provider(Window *window) {
  // single click / repeat-on-hold config:
   window_single_repeating_click_subscribe(BUTTON_ID_SELECT, 1000, the_classic_run_click_handler);
-}
+}*/
 
 static void tick_handler(struct tm *tick_time, TimeUnits changed) {
   // Redraw
@@ -58,8 +60,27 @@ static void update_proc(Layer *layer, GContext *ctx) {
 	text_layer_set_font(s_process_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
 	text_layer_set_text_alignment(s_process_text_layer, GTextAlignmentCenter);
 
+	text_layer_set_text_color(s_pre_text_layer, NormalTextColor);
+  text_layer_set_background_color(s_pre_text_layer, GColorClear);
+  text_layer_set_font(s_pre_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));
+  text_layer_set_text_alignment(s_pre_text_layer, GTextAlignmentCenter);
+
 	if(pre_count < 8)
 	{
+		text_layer_set_text(s_pre_text_layer, "BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots");
+		
+		pre_count++;
+
+		return;
+	}
+
+	if(pre_count < 12)
+	{
+		if(flag_text_layer_destroy == 0)
+		{
+			flag_text_layer_destroy = 1;
+			text_layer_destroy(s_pre_text_layer);
+		}
 		text_layer_set_font(s_num_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
 		text_layer_set_text(s_num_text_layer, "Prepare!\n\nTo Pour");
 		
@@ -99,7 +120,7 @@ static void update_proc(Layer *layer, GContext *ctx) {
 		if(flag_classic_run_click)
 		{
 			vibes_long_pulse();
-			window_set_click_config_provider(s_main_window, (ClickConfigProvider) the_classic_run_config_provider);
+			//window_set_click_config_provider(s_main_window, (ClickConfigProvider) the_classic_run_config_provider);
 			flag_classic_run_click = 0;
 		}
 	}
@@ -121,6 +142,9 @@ static void main_window_load(Window *window) {
   s_canvas_layer = layer_create(bounds);
   layer_set_update_proc(s_canvas_layer, update_proc);
   layer_add_child(window_layer, s_canvas_layer);
+
+	s_pre_text_layer = text_layer_create(GRect(0, 5, bounds.size.w, bounds.size.h));
+	layer_add_child(s_canvas_layer, text_layer_get_layer(s_pre_text_layer));
 
 	s_num_text_layer = text_layer_create(GRect(0, s_num_text.y, bounds.size.w, bounds.size.h));
 	layer_add_child(s_canvas_layer, text_layer_get_layer(s_num_text_layer));

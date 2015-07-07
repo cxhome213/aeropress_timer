@@ -84,6 +84,9 @@ static void update_proc(Layer *layer, GContext *ctx) {
 		snprintf(num_buf, sizeof(num_buf), "%d", count--);
 		text_layer_set_text(s_num_text_layer, num_buf);
 		text_layer_set_text(s_process_text_layer, process_buf[num]);
+
+		if(count == -1)
+			vibes_short_pulse();
 	}
 	else
 	{
@@ -95,6 +98,7 @@ static void update_proc(Layer *layer, GContext *ctx) {
 		
 		if(flag_classic_run_click)
 		{
+			vibes_long_pulse();
 			window_set_click_config_provider(s_main_window, (ClickConfigProvider) the_classic_run_config_provider);
 			flag_classic_run_click = 0;
 		}

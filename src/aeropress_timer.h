@@ -2,9 +2,9 @@
 
 #include <pebble.h>
 
-#define BackGroundColor GColorTiffanyBlue
-#define NormalTextColor GColorPastelYellow
+#define BackGroundColor GColorElectricBlue
+#define NormalTextColor GColorWindsorTan
 
-#define ForeGroundColor GColorMidnightGreen
-#define HighlightTextColor GColorWhite
+#define ForeGroundColor GColorBlueMoon
+#define HighlightTextColor GColorPastelYellow
 

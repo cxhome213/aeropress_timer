@@ -158,6 +158,7 @@ static void main_window_unload(Window *window) {
 	text_layer_destroy(s_process_text_layer);
   text_layer_destroy(s_num_text_layer);
 	layer_destroy(s_canvas_layer);
+	tick_timer_service_unsubscribe();
 }
 
 void the_classic_run() {

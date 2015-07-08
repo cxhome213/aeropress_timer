@@ -1,11 +1,10 @@
 #include <pebble.h>
 
 #include "windows_include/standard_menu.h"
-#include "windows_include/the_classic_run.h"
+#include "windows_include/standard_menu_sub/the_classic_run.h"
 #include "aeropress_timer.h"
 
 #define NUM_WINDOWS 7
-#define CHECKBOX_WINDOW_CELL_HEIGHT 30
 
 static Window *s_main_window;
 static MenuLayer *s_menu_layer;

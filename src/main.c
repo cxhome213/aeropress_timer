@@ -5,7 +5,6 @@
 #include "aeropress_timer.h"
 
 #define NUM_WINDOWS 2
-#define CHECKBOX_WINDOW_CELL_HEIGHT 30
 
 static Window *s_main_window;
 static MenuLayer *s_menu_layer;

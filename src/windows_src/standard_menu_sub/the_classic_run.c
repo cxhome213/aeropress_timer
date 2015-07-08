@@ -1,5 +1,6 @@
 #include <pebble.h>
 #include <main.h>
+#include "windows_include/standard_menu_sub/the_classic_run.h"
 #include "aeropress_timer.h"
 
 #define PROCESS_NUM 4
@@ -65,7 +66,7 @@ static void update_proc(Layer *layer, GContext *ctx) {
   text_layer_set_font(s_pre_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));
   text_layer_set_text_alignment(s_pre_text_layer, GTextAlignmentCenter);
 
-	if(pre_count < 8)
+	if(pre_count < PRE_COUNT_INFO)
 	{
 		text_layer_set_text(s_pre_text_layer, "BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots");
 		
@@ -74,7 +75,7 @@ static void update_proc(Layer *layer, GContext *ctx) {
 		return;
 	}
 
-	if(pre_count < 12)
+	if(pre_count < PRE_COUNT_READY)
 	{
 		if(flag_text_layer_destroy == 0)
 		{

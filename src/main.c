@@ -8,6 +8,7 @@
 
 static Window *s_main_window;
 static MenuLayer *s_menu_layer;
+static TextLayer *s_num_text_layer;
 
 static GBitmap *s_icon_bitmap_menu;
 
@@ -47,7 +48,12 @@ static void select_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index,
 }
 
 static void draw_header_callback(GContext *ctx, const Layer *cell_layer, uint16_t section_index, void *context) {
-  menu_cell_basic_header_draw(ctx, cell_layer, "AEROPRESS TIMER");
+  //menu_cell_basic_header_draw(ctx, cell_layer, "AEROPRESS TIMER");
+	text_layer_set_text_color(s_num_text_layer, HighlightTextColor);
+  text_layer_set_background_color(s_num_text_layer, ForeGroundColor);
+  text_layer_set_font(s_num_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));
+  text_layer_set_text_alignment(s_num_text_layer, GTextAlignmentCenter);
+	text_layer_set_text(s_num_text_layer, "AEROPRESS TIMER");
 }
 
 static int16_t get_header_height_callback(struct MenuLayer *menu_layer, uint16_t section_index, void *context) {
@@ -81,6 +87,9 @@ static void window_load(Window *window) {
 	menu_layer_pad_bottom_enable(s_menu_layer, true);
 
 	layer_add_child(window_layer, menu_layer_get_layer(s_menu_layer));
+
+	s_num_text_layer = text_layer_create(GRect(0, 0, bounds.size.w, 16));
+	layer_add_child(window_layer, text_layer_get_layer(s_num_text_layer));
 }
 
 static void window_unload(Window *window) {

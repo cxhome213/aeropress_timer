@@ -2,11 +2,11 @@
 
 #include <pebble.h>
 
-#define BackGroundColor GColorElectricBlue
+#define BackGroundColor GColorWhite
 #define NormalTextColor GColorWindsorTan
 
-#define ForeGroundColor GColorBlueMoon
-#define HighlightTextColor GColorPastelYellow
+#define ForeGroundColor GColorBlue
+#define HighlightTextColor GColorWhite
 
 #define CHECKBOX_WINDOW_CELL_HEIGHT 40
 

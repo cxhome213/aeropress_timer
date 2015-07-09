@@ -5,7 +5,7 @@
 #include "windows_include/standard_run.h"
 
 
-#define NUM_WINDOWS 7
+#define NUM_WINDOWS 9
 
 static Window *s_main_window;
 static MenuLayer *s_menu_layer;
@@ -18,6 +18,8 @@ static GBitmap *s_icon_bitmap_menu_4;
 static GBitmap *s_icon_bitmap_menu_5;
 static GBitmap *s_icon_bitmap_menu_6;
 static GBitmap *s_icon_bitmap_menu_7;
+static GBitmap *s_icon_bitmap_menu_8;
+static GBitmap *s_icon_bitmap_menu_9;
 
 static uint16_t get_num_rows_callback(MenuLayer *menu_layer, uint16_t section_index, void *context) {
   return NUM_WINDOWS;
@@ -45,6 +47,12 @@ static void draw_row_callback(GContext *ctx, Layer *cell_layer, MenuIndex *cell_
       break;
 		case 6:
       menu_cell_basic_draw(ctx, cell_layer, "The Charlene", NULL, s_icon_bitmap_menu_7);
+      break;
+		case 7:
+      menu_cell_basic_draw(ctx, cell_layer, "The Jay", NULL, s_icon_bitmap_menu_8);
+      break;
+		case 8:
+      menu_cell_basic_draw(ctx, cell_layer, "The Collective", NULL, s_icon_bitmap_menu_9);
       break;
     default:
       break;
@@ -77,6 +85,12 @@ static void select_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index,
       break;
 		case 6:
       standard_run(6);
+      break;
+		case 7:
+      standard_run(7);
+      break;
+		case 8:
+      standard_run(8);
       break;
     default:
       break;
@@ -111,6 +125,8 @@ static void window_load(Window *window) {
 	s_icon_bitmap_menu_5 = gbitmap_create_with_resource(RESOURCE_ID_SUB_MENU_5);
 	s_icon_bitmap_menu_6 = gbitmap_create_with_resource(RESOURCE_ID_SUB_MENU_6);
 	s_icon_bitmap_menu_7 = gbitmap_create_with_resource(RESOURCE_ID_SUB_MENU_7);
+	s_icon_bitmap_menu_8 = gbitmap_create_with_resource(RESOURCE_ID_SUB_MENU_8);
+	s_icon_bitmap_menu_9 = gbitmap_create_with_resource(RESOURCE_ID_SUB_MENU_9);
 
   s_menu_layer = menu_layer_create(bounds);
   menu_layer_set_click_config_onto_window(s_menu_layer, window);
@@ -143,6 +159,8 @@ static void window_unload(Window *window) {
 	gbitmap_destroy(s_icon_bitmap_menu_5);
 	gbitmap_destroy(s_icon_bitmap_menu_6);
 	gbitmap_destroy(s_icon_bitmap_menu_7);
+	gbitmap_destroy(s_icon_bitmap_menu_8);
+	gbitmap_destroy(s_icon_bitmap_menu_9);
 }
 
 void standard_menu_push() {

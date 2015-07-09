@@ -1,8 +1,8 @@
 {
   "uuid": "c39ad3ca-f359-43b1-85c3-4bdcce769585",
-  "shortName": "aeropress_timer",
-  "longName": "aeropress_timer",
-  "companyName": "MakeAwesomeHappen",
+  "shortName": "aero timer",
+  "longName": "aeropress timer",
+  "companyName": "Xiao's Lab",
   "versionLabel": "1.0",
   "sdkVersion": "3",
   "targetPlatforms": ["basalt"],
@@ -63,6 +63,11 @@
         "type": "png",
         "name": "SUB_MENU_8",
         "file": "images/sub_menu_8.png"
+      },
+			{
+        "type": "png",
+        "name": "SUB_MENU_9",
+        "file": "images/sub_menu_9.png"
       },
       {
         "type": "png",

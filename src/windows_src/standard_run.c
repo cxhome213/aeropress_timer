@@ -3,39 +3,44 @@
 #include "windows_include/standard_run.h"
 #include "aeropress_timer.h"
 
-#define PROCESS_NUM 5
-#define MENU_NUM 7
+#define PROCESS_NUM 6
+#define MENU_NUM 9
 
 static int menu_num;
 
 static const int process_time[MENU_NUM][PROCESS_NUM] = {
-																													{10, 20, 15, 15, 0},
-																													{10, 20, 15, 15, 0},
-																													{10, 20, 15, 15, 0},
-																													{10, 20, 15, 15, 0},
-																													{10, 20, 15, 15, 0},
-																													{10, 20, 15, 15, 0},
-																													{10, 20, 15, 15, 0}
+																													{10, 21, 16, 15, 0,  0},
+																													{10, 11, 71, 10, 20, 0},
+																													{10, 21, 11, 20, 5,  20},
+																													{10, 46, 6,  20, 0,  0},
+																													{10, 26, 11, 25, 5,  40},
+																													{10, 36, 61, 5,  20, 0},
+																													{10, 21, 16, 15, 0,  0},
+																													{10, 21, 31, 5,  20, 0},
+																													{10, 16, 91, 15, 5,  20}
 																																					};
 static const char *process_buf[MENU_NUM][PROCESS_NUM] = {
-																												{"Pour\n2 Shots", "\nStir", "\nSteep", "\nPlunge", ""},
-																												{"Pour\n2 Shots", "\nStir", "\nSteep", "\nPlunge", ""},
-																												{"Pour\n2 Shots", "\nStir", "\nSteep", "\nPlunge", ""},
-																												{"Pour\n2 Shots", "\nStir", "\nSteep", "\nPlunge", ""},
-																												{"Pour\n2 Shots", "\nStir", "\nSteep", "\nPlunge", ""},
-																												{"Pour\n2 Shots", "\nStir", "\nSteep", "\nPlunge", ""},
-																												{"Pour\n2 Shots", "\nStir", "\nSteep", "\nPlunge", ""}
+																												{"Pour\n2 Shots",  "\nStir", "\nSteep", "\nPlunge", "", ""},
+																												{"Pour\n4 Shots",  "\nStir", "\nSteep", "\nStir", "\nPlunge", ""},
+																												{"Pour\n1 Shots",  "\nStir", "Pour\n1 Shots", "\nSteep", "\nFlip", "\nPlunge"},
+																												{"Pour\n3.5 Shots", "\nStir", "\nFlip", "\nPlunge", "", ""},
+																												{"Pour\n2 Shots",  "\nStir", "Pour\n2 Shots", "\nSteep", "\nFlip", "\nPlunge"},
+																												{"Pour\n3 Shots",  "\nStir", "\nSteep", "\nFlip", "\nPlunge", ""},
+																												{"Pour\n1 Shots",  "\nSteep",  "Pour\n3 Shots", "\nPlunge", "", ""},
+																												{"Pour\n4 Shots",  "\nStir", "\nSteep", "\nFlip", "\nPlunge", ""},
+																												{"Pour\n3 Shots",  "\nStir",  "\nSteep", "\nStir", "\nFlip", "\nPlunge"}
 																																																					};
 
 static const char *pre_buf[MENU_NUM] = {
 																				"BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots",
-																				"BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots",
-																				"BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots",
-																				"BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots",
-																				"BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots",
-																				"BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots",
-																				"BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots"
-																																																					};
+																				"BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n1.5  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n4  Shots",
+																				"BREWING METHOD\nInverted\n\nCOFFEE VOLUME\n1.5  Scoops\n\nCOFFEE GRIND\nMediumn\n\nWater Volume\n2  Shots",
+																				"BREWING METHOD\nInverted\n\nCOFFEE VOLUME\n1  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n3.5  Shots",
+																				"BREWING METHOD\nInverted\n\nCOFFEE VOLUME\n1  Scoops\n\nCOFFEE GRIND\nMedium Coarse\n\nWater Volume\n4  Shots",
+																				"BREWING METHOD\nInverted\n\nCOFFEE VOLUME\n1.5  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n3  Shots",
+																				"BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n1.5  Scoops\n\nCOFFEE GRIND\nCoarse\n\nWater Volume\n4  Shots",
+																				"BREWING METHOD\nInverted\n\nCOFFEE VOLUME\n1.5  Scoops\n\nCOFFEE GRIND\nFine\n\nWater Volume\n4  Shots",
+																				"BREWING METHOD\nInverted\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nCoarse\n\nWater Volume\n3  Shots"																																																											};
 
 static char process_num_buf[10];
 static volatile int count;
@@ -89,7 +94,7 @@ static void update_proc(Layer *layer, GContext *ctx) {
 
 	text_layer_set_text_color(s_pre_text_layer, NormalTextColor);
   text_layer_set_background_color(s_pre_text_layer, GColorClear);
-  text_layer_set_font(s_pre_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));
+  text_layer_set_font(s_pre_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14));
   text_layer_set_text_alignment(s_pre_text_layer, GTextAlignmentCenter);
 
 	if(pre_count < PRE_COUNT_INFO)

@@ -16,33 +16,53 @@
     "media": [
 			{
         "type": "png",
-        "name": "TICK_BLACK",
-        "file": "images/tick_black.png"
+        "name": "MENU_1",
+        "file": "images/menu_1.png"
+      },
+			{
+        "type": "png",
+        "name": "MENU_2",
+        "file": "images/menu_2.png"
+      },
+			{
+        "type": "png",
+        "name": "SUB_MENU_1",
+        "file": "images/sub_menu_1.png"
       },
       {
         "type": "png",
-        "name": "TICK_WHITE",
-        "file": "images/tick_white.png"
+        "name": "SUB_MENU_2",
+        "file": "images/sub_menu_2.png"
       },
       {
         "type": "png",
-        "name": "CONFIRM",
-        "file": "images/confirm.png"
+        "name": "SUB_MENU_3",
+        "file": "images/sub_menu_3.png"
       },
       {
         "type": "png",
-        "name": "CROSS",
-        "file": "images/cross.png"
+        "name": "SUB_MENU_4",
+        "file": "images/sub_menu_4.png"
       },
       {
         "type": "png",
-        "name": "TICK",
-        "file": "images/tick.png"
+        "name": "SUB_MENU_5",
+        "file": "images/sub_menu_5.png"
       },
       {
         "type": "png",
-        "name": "WARNING",
-        "file": "images/warning.png"
+        "name": "SUB_MENU_6",
+        "file": "images/sub_menu_6.png"
+      },
+      {
+        "type": "png",
+        "name": "SUB_MENU_7",
+        "file": "images/sub_menu_7.png"
+      },
+      {
+        "type": "png",
+        "name": "SUB_MENU_8",
+        "file": "images/sub_menu_8.png"
       },
       {
         "type": "png",

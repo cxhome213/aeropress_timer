@@ -8,9 +8,10 @@
 
 static Window *s_main_window;
 static MenuLayer *s_menu_layer;
-static TextLayer *s_num_text_layer;
+static TextLayer *s_text_layer;
 
-static GBitmap *s_icon_bitmap_menu;
+static GBitmap *s_icon_bitmap_menu_1;
+static GBitmap *s_icon_bitmap_menu_2;
 
 static uint16_t get_num_rows_callback(MenuLayer *menu_layer, uint16_t section_index, void *context) {
   return NUM_WINDOWS;
@@ -19,10 +20,10 @@ static uint16_t get_num_rows_callback(MenuLayer *menu_layer, uint16_t section_in
 static void draw_row_callback(GContext *ctx, Layer *cell_layer, MenuIndex *cell_index, void *context) {
   switch(cell_index->row) {
     case 0:
-      menu_cell_basic_draw(ctx, cell_layer, "Standard", NULL, s_icon_bitmap_menu);
+      menu_cell_basic_draw(ctx, cell_layer, "Standard", NULL, s_icon_bitmap_menu_1);
       break;
     case 1:
-      menu_cell_basic_draw(ctx, cell_layer, "Two Cup", NULL, NULL);
+      menu_cell_basic_draw(ctx, cell_layer, "Two Cup", NULL, s_icon_bitmap_menu_2);
       break;
     default:
       break;
@@ -49,11 +50,11 @@ static void select_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index,
 
 static void draw_header_callback(GContext *ctx, const Layer *cell_layer, uint16_t section_index, void *context) {
   //menu_cell_basic_header_draw(ctx, cell_layer, "AEROPRESS TIMER");
-	text_layer_set_text_color(s_num_text_layer, HighlightTextColor);
-  text_layer_set_background_color(s_num_text_layer, ForeGroundColor);
-  text_layer_set_font(s_num_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));
-  text_layer_set_text_alignment(s_num_text_layer, GTextAlignmentCenter);
-	text_layer_set_text(s_num_text_layer, "AEROPRESS TIMER");
+	text_layer_set_text_color(s_text_layer, HighlightTextColor);
+  text_layer_set_background_color(s_text_layer, ForeGroundColor);
+  text_layer_set_font(s_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14));
+  text_layer_set_text_alignment(s_text_layer, GTextAlignmentCenter);
+	text_layer_set_text(s_text_layer, "AEROPRESS TIMER");
 }
 
 static int16_t get_header_height_callback(struct MenuLayer *menu_layer, uint16_t section_index, void *context) {
@@ -68,7 +69,8 @@ static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
-	s_icon_bitmap_menu = gbitmap_create_with_resource(RESOURCE_ID_TICK);
+	s_icon_bitmap_menu_1 = gbitmap_create_with_resource(RESOURCE_ID_MENU_1);
+	s_icon_bitmap_menu_2 = gbitmap_create_with_resource(RESOURCE_ID_MENU_2);
 
   s_menu_layer = menu_layer_create(bounds);
   menu_layer_set_click_config_onto_window(s_menu_layer, window);
@@ -88,13 +90,15 @@ static void window_load(Window *window) {
 
 	layer_add_child(window_layer, menu_layer_get_layer(s_menu_layer));
 
-	s_num_text_layer = text_layer_create(GRect(0, 0, bounds.size.w, 16));
-	layer_add_child(window_layer, text_layer_get_layer(s_num_text_layer));
+	s_text_layer = text_layer_create(GRect(0, 0, bounds.size.w, 16));
+	layer_add_child(window_layer, text_layer_get_layer(s_text_layer));
 }
 
 static void window_unload(Window *window) {
   menu_layer_destroy(s_menu_layer);
-	gbitmap_destroy(s_icon_bitmap_menu);
+	text_layer_destroy(s_text_layer);
+	gbitmap_destroy(s_icon_bitmap_menu_1);
+	gbitmap_destroy(s_icon_bitmap_menu_2);
 }
 
 void main_menu_init() {

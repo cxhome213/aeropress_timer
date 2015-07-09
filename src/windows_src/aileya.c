@@ -23,8 +23,8 @@ static void window_load(Window *window) {
   bitmap_layer_set_compositing_mode(s_icon_layer, GCompOpSet);
   layer_add_child(window_layer, bitmap_layer_get_layer(s_icon_layer));
 
-  s_tick_bitmap = gbitmap_create_with_resource(RESOURCE_ID_TICK);
-  s_cross_bitmap = gbitmap_create_with_resource(RESOURCE_ID_CROSS);
+  s_tick_bitmap = gbitmap_create_with_resource(RESOURCE_ID_MENU_1);
+  s_cross_bitmap = gbitmap_create_with_resource(RESOURCE_ID_MENU_2);
 
   s_action_bar_layer = action_bar_layer_create();
   action_bar_layer_set_icon(s_action_bar_layer, BUTTON_ID_UP, s_tick_bitmap);

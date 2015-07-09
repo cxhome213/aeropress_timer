@@ -5,7 +5,7 @@
 #define BackGroundColor GColorWhite
 #define NormalTextColor GColorWindsorTan
 
-#define ForeGroundColor GColorBlue
+#define ForeGroundColor GColorWindsorTan
 #define HighlightTextColor GColorWhite
 
 #define CHECKBOX_WINDOW_CELL_HEIGHT 40

@@ -27,7 +27,7 @@ static GPoint s_circle;
 static GPoint s_num_text;
 static GPoint s_process_text;
 
-int flag_classic_run_click, flag_text_layer_destroy = 0;
+int flag_classic_run_click, flag_text_layer_destroy;
 
 void the_classic_run_click_handler(ClickRecognizerRef recognizer, void *context) {
   main_menu_init();
@@ -77,9 +77,9 @@ static void update_proc(Layer *layer, GContext *ctx) {
 
 	if(pre_count < PRE_COUNT_READY)
 	{
-		if(flag_text_layer_destroy == 0)
+		if(flag_text_layer_destroy)
 		{
-			flag_text_layer_destroy = 1;
+			flag_text_layer_destroy = FALSE;
 			text_layer_destroy(s_pre_text_layer);
 		}
 		text_layer_set_font(s_num_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
@@ -122,7 +122,7 @@ static void update_proc(Layer *layer, GContext *ctx) {
 		{
 			vibes_long_pulse();
 			//window_set_click_config_provider(s_main_window, (ClickConfigProvider) the_classic_run_config_provider);
-			flag_classic_run_click = 0;
+			flag_classic_run_click = FALSE;
 		}
 	}
 }
@@ -175,7 +175,8 @@ void the_classic_run() {
 
 	tick_timer_service_subscribe(SECOND_UNIT, tick_handler);
 
-	flag_classic_run_click = 1;
+	flag_classic_run_click = TRUE;
+	flag_text_layer_destroy = TRUE;
 	count = -1;
 	num = -1;
 	pre_count = 0;

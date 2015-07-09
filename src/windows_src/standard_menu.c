@@ -2,13 +2,7 @@
 
 #include "aeropress_timer.h"
 #include "windows_include/standard_menu.h"
-#include "windows_include/standard_menu_sub/the_classic_run.h"
-#include "windows_include/standard_menu_sub/the_charger_run.h"
-#include "windows_include/standard_menu_sub/the_inverted_run.h"
-#include "windows_include/standard_menu_sub/the_bold_run.h"
-#include "windows_include/standard_menu_sub/the_weaver_run.h"
-#include "windows_include/standard_menu_sub/the_iced_run.h"
-#include "windows_include/standard_menu_sub/the_charlene_run.h"
+#include "windows_include/standard_run.h"
 
 
 #define NUM_WINDOWS 7
@@ -64,25 +58,25 @@ static int16_t get_cell_height_callback(struct MenuLayer *menu_layer, MenuIndex 
 static void select_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index, void *context) {
   switch(cell_index->row) {
     case 0:
-      the_classic_run();
+      standard_run(0);
       break;
     case 1:
-      the_charger_run();
+      standard_run(1);
       break;
 		case 2:
-      the_inverted_run();
+      standard_run(2);
       break;
 		case 3:
-      the_bold_run();
+      standard_run(3);
       break;
 		case 4:
-      the_weaver_run();
+      standard_run(4);
       break;
 		case 5:
-      the_iced_run();
+      standard_run(5);
       break;
 		case 6:
-      the_charlene_run();
+      standard_run(6);
       break;
     default:
       break;

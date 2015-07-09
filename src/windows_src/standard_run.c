@@ -1,20 +1,45 @@
 #include <pebble.h>
 #include <main.h>
-#include "windows_include/standard_menu_sub/the_classic_run.h"
+#include "windows_include/standard_run.h"
 #include "aeropress_timer.h"
 
-#define PROCESS_NUM 4
+#define PROCESS_NUM 5
+#define MENU_NUM 7
 
-static const int process_time[PROCESS_NUM] = {10, 20, 15, 15};
-static const char *process_buf[PROCESS_NUM] = { "Pour\n2 Shots",
-																				"\nStir",
-																				"\nSteep",
-																				"\nPlunge"
-																			};
+static int menu_num;
 
-static char num_buf[10];
+static const int process_time[MENU_NUM][PROCESS_NUM] = {
+																													{10, 20, 15, 15, 0},
+																													{10, 20, 15, 15, 0},
+																													{10, 20, 15, 15, 0},
+																													{10, 20, 15, 15, 0},
+																													{10, 20, 15, 15, 0},
+																													{10, 20, 15, 15, 0},
+																													{10, 20, 15, 15, 0}
+																																					};
+static const char *process_buf[MENU_NUM][PROCESS_NUM] = {
+																												{"Pour\n2 Shots", "\nStir", "\nSteep", "\nPlunge", ""},
+																												{"Pour\n2 Shots", "\nStir", "\nSteep", "\nPlunge", ""},
+																												{"Pour\n2 Shots", "\nStir", "\nSteep", "\nPlunge", ""},
+																												{"Pour\n2 Shots", "\nStir", "\nSteep", "\nPlunge", ""},
+																												{"Pour\n2 Shots", "\nStir", "\nSteep", "\nPlunge", ""},
+																												{"Pour\n2 Shots", "\nStir", "\nSteep", "\nPlunge", ""},
+																												{"Pour\n2 Shots", "\nStir", "\nSteep", "\nPlunge", ""}
+																																																					};
+
+static const char *pre_buf[MENU_NUM] = {
+																				"BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots",
+																				"BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots",
+																				"BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots",
+																				"BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots",
+																				"BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots",
+																				"BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots",
+																				"BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots"
+																																																					};
+
+static char process_num_buf[10];
 static volatile int count;
-static volatile int num;
+static volatile int process_num;
 static volatile int pre_count;
 
 static Window *s_main_window;
@@ -29,11 +54,12 @@ static GPoint s_process_text;
 
 static int flag_classic_run_click, flag_text_layer_destroy;
 
+/*
 static void the_classic_run_click_handler(ClickRecognizerRef recognizer, void *context) {
   main_menu_init();
 }
 
-/*
+
 void the_classic_run_config_provider(Window *window) {
  // single click / repeat-on-hold config:
   window_single_repeating_click_subscribe(BUTTON_ID_SELECT, 1000, the_classic_run_click_handler);
@@ -68,7 +94,7 @@ static void update_proc(Layer *layer, GContext *ctx) {
 
 	if(pre_count < PRE_COUNT_INFO)
 	{
-		text_layer_set_text(s_pre_text_layer, "BREWING METHOD\nTraditional\n\nCOFFEE VOLUME\n2  Scoops\n\nCOFFEE GRIND\nMedium Fine\n\nWater Volume\n2  Shots");
+		text_layer_set_text(s_pre_text_layer, pre_buf[menu_num]);
 		
 		pre_count++;
 
@@ -92,28 +118,33 @@ static void update_proc(Layer *layer, GContext *ctx) {
 
 	if(count  == -1)
 	{
-		if(++num < PROCESS_NUM)
+		if(++process_num < PROCESS_NUM)
 		{
-			count = process_time[num];
+			count = process_time[menu_num][process_num];
+
+			if(count == 0)
+			{
+				process_num = PROCESS_NUM + 1;
+			}
 		}
 	}
 
-	if(num < PROCESS_NUM)
+	if(process_num < PROCESS_NUM)
 	{
 		graphics_draw_circle(ctx, s_circle, 40);
 
-		memset(num_buf, '\0', 10);
-		snprintf(num_buf, sizeof(num_buf), "%d", count--);
-		text_layer_set_text(s_num_text_layer, num_buf);
-		text_layer_set_text(s_process_text_layer, process_buf[num]);
+		memset(process_num_buf, '\0', 10);
+		snprintf(process_num_buf, sizeof(process_num_buf), "%d", count--);
+		text_layer_set_text(s_num_text_layer, process_num_buf);
+		text_layer_set_text(s_process_text_layer, process_buf[menu_num][process_num]);
 
 		if(count == -1)
 			vibes_short_pulse();
 	}
 	else
 	{
-		memset(num_buf, '\0', 10);
-		text_layer_set_text(s_process_text_layer, num_buf);
+		memset(process_num_buf, '\0', 10);
+		text_layer_set_text(s_process_text_layer, process_num_buf);
 
 		text_layer_set_font(s_num_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
 		text_layer_set_text(s_num_text_layer, "Enjoy!\n\nFresh Coffee!");
@@ -162,7 +193,7 @@ static void main_window_unload(Window *window) {
 	tick_timer_service_unsubscribe();
 }
 
-void the_classic_run() {
+void standard_run(int cnt) {
 	if(!s_main_window) {
     s_main_window = window_create();
     window_set_background_color(s_main_window, BackGroundColor);
@@ -175,9 +206,10 @@ void the_classic_run() {
 
 	tick_timer_service_subscribe(SECOND_UNIT, tick_handler);
 
+	menu_num = cnt;
 	flag_classic_run_click = TRUE;
 	flag_text_layer_destroy = TRUE;
 	count = -1;
-	num = -1;
+	process_num = -1;
 	pre_count = 0;
 }

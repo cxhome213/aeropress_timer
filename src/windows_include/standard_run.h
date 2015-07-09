@@ -2,4 +2,4 @@
 
 #include <pebble.h>
 
-void the_charlene_run();
+void standard_run(int cnt);

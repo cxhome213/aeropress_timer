@@ -1,8 +1,15 @@
 #include <pebble.h>
 
+#include "aeropress_timer.h"
 #include "windows_include/standard_menu.h"
 #include "windows_include/standard_menu_sub/the_classic_run.h"
-#include "aeropress_timer.h"
+#include "windows_include/standard_menu_sub/the_charger_run.h"
+#include "windows_include/standard_menu_sub/the_inverted_run.h"
+#include "windows_include/standard_menu_sub/the_bold_run.h"
+#include "windows_include/standard_menu_sub/the_weaver_run.h"
+#include "windows_include/standard_menu_sub/the_iced_run.h"
+#include "windows_include/standard_menu_sub/the_charlene_run.h"
+
 
 #define NUM_WINDOWS 7
 
@@ -60,22 +67,22 @@ static void select_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index,
       the_classic_run();
       break;
     case 1:
-      //dialog_choice_window_push();
+      the_charger_run();
       break;
 		case 2:
-      //dialog_choice_window_push();
+      the_inverted_run();
       break;
 		case 3:
-      //dialog_choice_window_push();
+      the_bold_run();
       break;
 		case 4:
-      //dialog_choice_window_push();
+      the_weaver_run();
       break;
 		case 5:
-      //dialog_choice_window_push();
+      the_iced_run();
       break;
 		case 6:
-      //dialog_choice_window_push();
+      the_charlene_run();
       break;
     default:
       break;

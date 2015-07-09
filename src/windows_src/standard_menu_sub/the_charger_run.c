@@ -1,6 +1,6 @@
 #include <pebble.h>
 #include <main.h>
-#include "windows_include/standard_menu_sub/the_classic_run.h"
+#include "windows_include/standard_menu_sub/the_charger_run.h"
 #include "aeropress_timer.h"
 
 #define PROCESS_NUM 4
@@ -27,16 +27,16 @@ static GPoint s_circle;
 static GPoint s_num_text;
 static GPoint s_process_text;
 
-static int flag_classic_run_click, flag_text_layer_destroy;
+static int flag_run_click, flag_text_layer_destroy;
 
-static void the_classic_run_click_handler(ClickRecognizerRef recognizer, void *context) {
+static void the_run_click_handler(ClickRecognizerRef recognizer, void *context) {
   main_menu_init();
 }
 
 /*
-void the_classic_run_config_provider(Window *window) {
+void the_run_config_provider(Window *window) {
  // single click / repeat-on-hold config:
-  window_single_repeating_click_subscribe(BUTTON_ID_SELECT, 1000, the_classic_run_click_handler);
+  window_single_repeating_click_subscribe(BUTTON_ID_SELECT, 1000, the_run_click_handler);
 }*/
 
 static void tick_handler(struct tm *tick_time, TimeUnits changed) {
@@ -118,11 +118,11 @@ static void update_proc(Layer *layer, GContext *ctx) {
 		text_layer_set_font(s_num_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
 		text_layer_set_text(s_num_text_layer, "Enjoy!\n\nFresh Coffee!");
 		
-		if(flag_classic_run_click)
+		if(flag_run_click)
 		{
 			vibes_long_pulse();
-			//window_set_click_config_provider(s_main_window, (ClickConfigProvider) the_classic_run_config_provider);
-			flag_classic_run_click = FALSE;
+			//window_set_click_config_provider(s_main_window, (ClickConfigProvider) the_run_config_provider);
+			flag_run_click = FALSE;
 		}
 	}
 }
@@ -162,7 +162,7 @@ static void main_window_unload(Window *window) {
 	tick_timer_service_unsubscribe();
 }
 
-void the_classic_run() {
+void the_charger_run() {
 	if(!s_main_window) {
     s_main_window = window_create();
     window_set_background_color(s_main_window, BackGroundColor);
@@ -175,7 +175,7 @@ void the_classic_run() {
 
 	tick_timer_service_subscribe(SECOND_UNIT, tick_handler);
 
-	flag_classic_run_click = TRUE;
+	flag_run_click = TRUE;
 	flag_text_layer_destroy = TRUE;
 	count = -1;
 	num = -1;

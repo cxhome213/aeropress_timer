@@ -1,7 +1,7 @@
 {
   "uuid": "c39ad3ca-f359-43b1-85c3-4bdcce769585",
-  "shortName": "aero timer",
-  "longName": "aeropress timer",
+  "shortName": "AeroTimer",
+  "longName": "Aeropress Timer",
   "companyName": "Xiao's Lab",
   "versionLabel": "1.0",
   "sdkVersion": "3",
@@ -23,6 +23,21 @@
         "type": "png",
         "name": "MENU_2",
         "file": "images/menu_2.png"
+      },
+			{
+        "type": "png",
+        "name": "MENU_3",
+        "file": "images/menu_3.png"
+      },
+			{
+        "type": "png",
+        "name": "MENU_4",
+        "file": "images/menu_4.png"
+      },
+			{
+        "type": "png",
+        "name": "MENU_5",
+        "file": "images/menu_5.png"
       },
 			{
         "type": "png",
@@ -68,6 +83,36 @@
         "type": "png",
         "name": "SUB_MENU_9",
         "file": "images/sub_menu_9.png"
+      },
+			{
+        "type": "png",
+        "name": "AU",
+        "file": "images/AU.png"
+      },
+			{
+        "type": "png",
+        "name": "IT",
+        "file": "images/IT.png"
+      },
+			{
+        "type": "png",
+        "name": "JP",
+        "file": "images/JP.png"
+      },
+			{
+        "type": "png",
+        "name": "NW",
+        "file": "images/NW.png"
+      },
+			{
+        "type": "png",
+        "name": "UK",
+        "file": "images/UK.png"
+      },
+			{
+        "type": "png",
+        "name": "US",
+        "file": "images/US.png"
       },
       {
         "type": "png",

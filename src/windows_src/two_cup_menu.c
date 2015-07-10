@@ -2,6 +2,7 @@
 #include "aeropress_timer.h"
 
 #include "windows_include/two_cup_menu.h"
+#include "windows_include/two_cup_run.h"
 
 #define NUM_WINDOWS 2
 
@@ -19,10 +20,10 @@ static uint16_t get_num_rows_callback(MenuLayer *menu_layer, uint16_t section_in
 static void draw_row_callback(GContext *ctx, Layer *cell_layer, MenuIndex *cell_index, void *context) {
   switch(cell_index->row) {
     case 0:
-      menu_cell_basic_draw(ctx, cell_layer, "1", NULL, s_icon_bitmap_menu_1);
+      menu_cell_basic_draw(ctx, cell_layer, "The Willow", NULL, s_icon_bitmap_menu_1);
       break;
     case 1:
-      menu_cell_basic_draw(ctx, cell_layer, "2", NULL, s_icon_bitmap_menu_2);
+      menu_cell_basic_draw(ctx, cell_layer, "The Wren", NULL, s_icon_bitmap_menu_2);
       break;
     default:
       break;
@@ -36,12 +37,11 @@ static int16_t get_cell_height_callback(struct MenuLayer *menu_layer, MenuIndex 
 static void select_callback(struct MenuLayer *menu_layer, MenuIndex *cell_index, void *context) {
   switch(cell_index->row) {
     case 0:
-      //dialog_choice_window_push();
+      two_cup_run(0);
       break;
     case 1:
-      //dialog_choice_window_push();
+      two_cup_run(1);
       break;
-    case 2:
     default:
       break;
   }
